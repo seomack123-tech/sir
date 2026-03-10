@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>S.I.R – Special Intensive Revision | Maharashtra</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;600;700&family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --green:   #0a5c36;
+      --gold:    #c9900c;
+      --saffron: #e8680a;
+      --cream:   #fdf6e3;
+      --dark:    #0d1a12;
+      --mid:     #1a3326;
+      --light:   #e8f5ee;
+      --border:  #b8d9c5;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--dark);
+      font-family: 'Noto Nastaliq Urdu', serif;
+      direction: rtl;
+      overflow-x: hidden;
+    }
+
+    /* ── HEADER ────────────────────────────────────── */
+    header {
+      background: linear-gradient(135deg, var(--dark) 0%, var(--mid) 60%, #0e4028 100%);
+      position: relative;
+      overflow: hidden;
+      padding: 0;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 50%, rgba(201,144,12,.18) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 80% at 80% 20%, rgba(10,92,54,.5) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .header-stripe {
+      display: flex;
+      height: 6px;
+    }
+    .header-stripe span { flex: 1; }
+    .header-stripe span:nth-child(1) { background: #ff9933; }
+    .header-stripe span:nth-child(2) { background: #ffffff; }
+    .header-stripe span:nth-child(3) { background: #138808; }
+    .header-stripe span:nth-child(4) { background: #000080; }
+
+    .header-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 56px 24px 48px;
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(201,144,12,.2);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-family: 'DM Sans', sans-serif;
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      padding: 5px 16px;
+      border-radius: 2px;
+      margin-bottom: 20px;
+    }
+
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 8vw, 5.5rem);
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -.02em;
+      line-height: 1;
+      direction: ltr;
+    }
+
+    header h1 em {
+      font-style: normal;
+      color: var(--gold);
+    }
+
+    .header-sub {
+      margin-top: 16px;
+      font-size: 1.15rem;
+      color: rgba(255,255,255,.72);
+      line-height: 1.9;
+    }
+
+    .header-tagline {
+      margin-top: 28px;
+      display: inline-block;
+      background: var(--saffron);
+      color: #fff;
+      padding: 10px 32px;
+      font-size: 1rem;
+      border-radius: 3px;
+      font-weight: 600;
+    }
+
+    /* ── SECTION COMMONS ───────────────────────────── */
+    section { max-width: 960px; margin: 0 auto; padding: 64px 24px; }
+
+    .section-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: .68rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--green);
+      font-weight: 500;
+      margin-bottom: 10px;
+      direction: ltr;
+      text-align: left;
+    }
+
+    h2.section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      color: var(--dark);
+      line-height: 1.3;
+      margin-bottom: 40px;
+      text-align: left;
+      direction: ltr;
+    }
+
+    /* ── VIDEO SECTION ──────────────────────────────── */
+    .video-section {
+      background: var(--dark);
+      max-width: 100%;
+      padding: 0;
+    }
+
+    .video-section-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 64px 24px;
+    }
+
+    .video-section .section-label { color: var(--gold); }
+    .video-section h2.section-title { color: #fff; }
+
+    /* ── VIDEO GRID ─────────────────────────────────── */
+    .video-featured {
+      margin-bottom: 24px;
+    }
+
+    .video-featured .video-embed-area {
+      aspect-ratio: 16/9;
+    }
+
+    .video-shorts-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    /* Shorts are vertical 9:16 */
+    .video-slot.short .video-embed-area {
+      aspect-ratio: 9/16;
+      max-height: 360px;
+    }
+
+    @media (max-width: 640px) {
+      .video-shorts-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ── SINGLE VIDEO SLOT ──────────────────────────── */
+    .video-slot {
+      position: relative;
+      background: var(--mid);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    /* 
+      ╔══════════════════════════════════════════════╗
+      ║  VIDEO EMBED AREA                            ║
+      ║  Yahan apna video ya YouTube embed paste     ║
+      ║  karein. Sirf iframe ya video tag add karein ║
+      ╚══════════════════════════════════════════════╝
+    */
+    .video-embed-area {
+      aspect-ratio: 16/9;
+      width: 100%;
+      background: #0a1a10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .video-embed-area iframe,
+    .video-embed-area video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .video-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: rgba(255,255,255,.4);
+      font-family: 'DM Sans', sans-serif;
+      font-size: .85rem;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .play-icon {
+      width: 56px; height: 56px;
+      border: 2px solid rgba(255,255,255,.2);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .play-icon::after {
+      content: '';
+      border-left: 18px solid rgba(255,255,255,.3);
+      border-top: 11px solid transparent;
+      border-bottom: 11px solid transparent;
+      margin-right: -4px;
+    }
+
+    .video-info {
+      padding: 16px 18px;
+    }
+
+    .video-title {
+      color: #fff;
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 4px;
+    }
+
+    .video-desc {
+      color: rgba(255,255,255,.45);
+      font-size: .85rem;
+      font-family: 'DM Sans', sans-serif;
+      direction: ltr;
+      text-align: left;
+      font-style: italic;
+    }
+
+    /* ── DIVIDER ────────────────────────────────────── */
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      margin: 0 auto;
+    }
+
+    /* ── FAQ SECTION ────────────────────────────────── */
+    .faq-section { padding-top: 64px; padding-bottom: 64px; }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+      animation: fadeUp .5s ease both;
+      direction: ltr;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .faq-item:nth-child(1)  { animation-delay: .05s }
+    .faq-item:nth-child(2)  { animation-delay: .10s }
+    .faq-item:nth-child(3)  { animation-delay: .15s }
+    .faq-item:nth-child(4)  { animation-delay: .20s }
+    .faq-item:nth-child(5)  { animation-delay: .25s }
+    .faq-item:nth-child(6)  { animation-delay: .30s }
+    .faq-item:nth-child(7)  { animation-delay: .35s }
+    .faq-item:nth-child(8)  { animation-delay: .40s }
+    .faq-item:nth-child(9)  { animation-delay: .45s }
+    .faq-item:nth-child(10) { animation-delay: .50s }
+    .faq-item:nth-child(11) { animation-delay: .55s }
+    .faq-item:nth-child(12) { animation-delay: .60s }
+    .faq-item:nth-child(13) { animation-delay: .65s }
+
+    .faq-question {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 22px 0;
+      cursor: pointer;
+      user-select: none;
+      list-style: none;
+      direction: ltr;
+      text-align: left;
+    }
+
+    .faq-question::-webkit-details-marker { display: none; }
+
+    .faq-q-content {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      flex: 1;
+    }
+
+    .faq-num {
+      font-family: 'DM Sans', sans-serif;
+      font-size: .75rem;
+      font-weight: 700;
+      color: var(--green);
+      background: var(--light);
+      border: 1px solid var(--border);
+      min-width: 32px;
+      height: 32px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      direction: ltr;
+      margin-top: 2px;
+    }
+
+    .faq-q-text {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--dark);
+      line-height: 1.7;
+    }
+
+    .faq-chevron {
+      flex-shrink: 0;
+      width: 22px; height: 22px;
+      border: 1.5px solid var(--border);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform .25s, background .25s;
+      margin-top: 4px;
+    }
+
+    .faq-chevron::after {
+      content: '';
+      border-right: 2px solid var(--green);
+      border-bottom: 2px solid var(--green);
+      width: 7px; height: 7px;
+      transform: rotate(45deg);
+      margin-top: -3px;
+      transition: transform .25s;
+    }
+
+    details[open] .faq-chevron {
+      background: var(--green);
+      border-color: var(--green);
+      transform: rotate(180deg);
+    }
+
+    details[open] .faq-chevron::after {
+      border-color: #fff;
+    }
+
+    .faq-answer {
+      padding: 0 0 22px 48px;
+      font-size: 1rem;
+      color: #2c4a38;
+      line-height: 2;
+      direction: ltr;
+      text-align: left;
+    }
+
+    .faq-answer a {
+      color: var(--green);
+      text-decoration: underline;
+      word-break: break-all;
+      direction: ltr;
+      display: inline-block;
+    }
+
+    /* ── IMPORTANT MESSAGE ──────────────────────────── */
+    .important-box {
+      background: linear-gradient(135deg, var(--green), #0e4028);
+      border-radius: 10px;
+      padding: 48px 40px;
+      color: #fff;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+
+    .important-box::before {
+      content: '📢';
+      font-size: 5rem;
+      position: absolute;
+      right: -10px; top: -10px;
+      opacity: .1;
+    }
+
+    .important-box h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      margin-bottom: 16px;
+      color: var(--gold);
+    }
+
+    .important-box p {
+      font-size: 1.05rem;
+      line-height: 2.1;
+      color: rgba(255,255,255,.88);
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .important-btn {
+      display: inline-block;
+      margin-top: 28px;
+      background: var(--gold);
+      color: var(--dark);
+      padding: 13px 36px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      font-family: 'DM Sans', sans-serif;
+      direction: ltr;
+      transition: background .2s;
+    }
+
+    .important-btn:hover { background: #e0a50d; }
+
+    /* ── FOOTER ─────────────────────────────────────── */
+    footer {
+      background: var(--dark);
+      color: rgba(255,255,255,.4);
+      text-align: center;
+      padding: 28px 24px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .8rem;
+      direction: ltr;
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────────── */
+    @media (max-width: 600px) {
+      .faq-answer { padding-left: 0; }
+      .important-box { padding: 36px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════ HEADER ══════════════ -->
+<header>
+  <div class="header-stripe">
+    <span></span><span></span><span></span><span></span>
+  </div>
+  <div class="header-inner">
+    <div class="badge">Election Commission of India · Maharashtra</div>
+    <h1><em>S.I.R</em></h1>
+    <p class="header-sub">Special Intensive Revision<br>خصوصی گہری نظرثانی – مہاراشٹر</p>
+    <span class="header-tagline">Voter List Sahi Karein · Apna Haq Bachayein</span>
+  </div>
+</header>
+
+<!-- ══════════════ VIDEO SECTION ══════════════ -->
+<div class="video-section">
+  <div class="video-section-inner">
+    <p class="section-label">Maloomat ke Liye Videos</p>
+    <h2 class="section-title">📹 Rehnumai Videos</h2>
+
+    <div class="video-featured">
+      <div class="video-slot">
+        <div class="video-embed-area">
+          <iframe
+            src="https://drive.google.com/file/d/1gPPaHiv32DCnBb9tosNWEaatl_l5amc4/preview"
+            title="S.I.R kya hai – What is Special Intensive Revision"
+            frameborder="0"
+            allow="autoplay"
+            allowfullscreen></iframe>
+        </div>
+        <div class="video-info">
+          <p class="video-title">S.I.R kya hai? – Mukammal Jaankari</p>
+          <p class="video-desc">What is Special Intensive Revision</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="video-shorts-row">
+
+      <!-- SHORT 1 – Voter Helpline App -->
+      <div class="video-slot short">
+        <div class="video-embed-area">
+          <iframe
+            src="https://drive.google.com/file/d/1oFFeCGhKPEBjYeJ8hqm6cTvWDVplCFdR/preview"
+            title="Voter Helpline ya ECINET App kaise install karein"
+            frameborder="0"
+            allow="autoplay"
+            allowfullscreen></iframe>
+        </div>
+        <div class="video-info">
+          <p class="video-title">Voter Helpline ya ECINET App install karein</p>
+          <p class="video-desc">How to install Voter Helpline or ECINET</p>
+        </div>
+      </div>
+
+      <!-- SHORT 2 – Know your BLO -->
+      <div class="video-slot short">
+        <div class="video-embed-area">
+          <iframe
+            src="https://drive.google.com/file/d/12xiX0NSp757-3iQZr4Nf5_u7QEzEg0W9/preview"
+            title="Apna BLO kaise maloom karein"
+            frameborder="0"
+            allow="autoplay"
+            allowfullscreen></iframe>
+        </div>
+        <div class="video-info">
+          <p class="video-title">Apna BLO kaise maloom karein</p>
+          <p class="video-desc">How to Know your BLO</p>
+        </div>
+      </div>
+
+      <!-- SHORT 3 – Search name in 2022 Yadi -->
+      <div class="video-slot short">
+        <div class="video-embed-area">
+          <iframe
+            src="https://drive.google.com/file/d/17LPEQMmypLGHO9grcZjP4G65hhASDvyK/preview"
+            title="2022 Voter Yadi mein naam kaise dhundein"
+            frameborder="0"
+            allow="autoplay"
+            allowfullscreen></iframe>
+        </div>
+        <div class="video-info">
+          <p class="video-title">2022 Voter Yadi mein apna naam dhundein</p>
+          <p class="video-desc">How to search names in 2022 Yadi</p>
+        </div>
+      </div>
+
+    </div><!-- /video-shorts-row -->
+  </div>
+</div><!-- /video-section -->
+
+<div class="divider"></div>
+
+<!-- ══════════════ FAQ SECTION ══════════════ -->
+<section class="faq-section">
+  <p class="section-label">Sawalat &amp; Jawabat</p>
+  <h2 class="section-title">📢 S.I.R Rehnumai – Aham Sawalat</h2>
+
+  <div class="faq-grid">
+
+    <details class="faq-item">
+      <summary class="faq-question">
+        <div class="faq-q-content">
+          <span class="faq-num">1</span>
+          <span class="faq-q-text">S.I.R kya hai?</span>
+        </div>
+        <span class="faq-chevron"></span>
+      </summary>
+      <div class="faq-answer">S.I.R Election Commission ki ek muhim hai jisme voter list ko sahi aur update kiya jata hai taake sirf sahi voter ka naam list mein rahe.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-question">
+        <div class="faq-q-content">
+          <span class="faq-num">2</span>
+          <span class="faq-q-text">S.I.R kyun zaroori hai?</span>
+        </div>
+        <span class="faq-chevron"></span>
+      </summary>
+      <div class="faq-answer">Voter list ko durust banane, galat ya duplicate naam hatane aur sahi voter ko vote ka haq dene ke liye.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-question">
+        <div class="faq-q-content">
+          <span class="faq-num">3</span>
+          <span class="faq-q-text">Mapping kya hai?</span>
+        </div>
+        <span class="faq-chevron"></span>
+      </summary>
+      <div class="faq-answer">Mapping ka matlab hai har voter ko uske sahi ghar aur polling booth ke saath jodna.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-question">
+        <div class="faq-q-content">
+          <span class="faq-num">4</span>
+          <span class="faq-q-text">Mapping kyun zaroori hai?</span>
+        </div>
+        <span class="faq-chevron"></span>
+      </summary>
+      <div class="faq-answer">Taake election ke waqt voter ko sahi booth mile aur voter list mein ghalti na ho.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-question">
+        <div class="faq-q-content">
+          <span class="faq-num">5</span>
+          <span class="faq-q-text">Agar Mapping na karein to kya hoga?</span>
+        </div>
+        <span class="faq-chevron"></span>
+      </summary>
+      <div class="faq-answer">Agar voter ki mapping nahi hogi to uska naam Unmapped Category mein ja sakta hai aur future mein vote dene mein mushkil ho sakti hai.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-question">
+        <div class="faq-q-content">
+          <span class="faq-num">6</span>
+          <span class="faq-q-text">Unmapped Category kya hai?</span>
+        </div>
+        <span class="faq-chevron"></span>
+      </summary>
+      <div class="faq-answer">Woh voter jinka address verify nahi hua, BLO ko ghar nahi mila ya mapping mukammal nahi hui.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-question">
+        <div class="faq-q-content">
+          <span class="faq-num">7</span>
+          <span class="faq-q-text">BLO kaun hota hai?</span>
+        </div>
+        <span class="faq-chevron"></span>
+      </summary>
+      <div class="faq-answer">BLO (Booth Level Officer) woh sarkari officer hota hai jo voter list ki verification aur mapping ka kaam karta hai.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-question">
+        <div class="faq-q-content">
+          <span class="faq-num">8</span>
+          <span class="faq-q-text">BLO kaise maloom karein?</span>
+        </div>
+        <span class="faq-chevron"></span>
+      </summary>
+      <div class="faq-answer">Voter Helpline App download karein aur usme "Search BLO" option se naam aur mobile number pata kar sakte hain.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-question">
+        <div class="faq-q-content">
+          <span class="faq-num">9</span>
+          <span class="faq-q-text">Agar 2002 ki voter list mein naam nahi hai to kya karein?</span>
+        </div>
+        <span class="faq-chevron"></span>
+      </summary>
+      <div class="faq-answer">Apne walid ya dada ka naam 2002 ki voter list mein search karein.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-question">
+        <div class="faq-q-content">
+          <span class="faq-num">10</span>
+          <span class="faq-q-text">2002 ki voter list mein naam kaise search karein?</span>
+        </div>
+        <span class="faq-chevron"></span>
+      </summary>
+      <div class="faq-answer">
+        Is link par ja kar apna ya walid ka naam search karein:<br>
+        <a href="https://ceoelection.maharashtra.gov.in/2002/2002rolldata.aspx" target="_blank" rel="noopener">
+          ceoelection.maharashtra.gov.in/2002/2002rolldata.aspx
+        </a>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-question">
+        <div class="faq-q-content">
+          <span class="faq-num">11</span>
+          <span class="faq-q-text">S.I.R mein kaun se documents zaroori ho sakte hain?</span>
+        </div>
+        <span class="faq-chevron"></span>
+      </summary>
+      <div class="faq-answer">Aadhaar Card, Voter ID Card, Ration Card, Electricity Bill, Gas Bill, Rent Agreement, Birth Certificate.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-question">
+        <div class="faq-q-content">
+          <span class="faq-num">12</span>
+          <span class="faq-q-text">Unmapped Category se kaise bachein?</span>
+        </div>
+        <span class="faq-chevron"></span>
+      </summary>
+      <div class="faq-answer">Apne BLO se rabta karein, verification ke waqt ghar par maujood rahein, documents dikhayein aur sahi address confirm karein.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-question">
+        <div class="faq-q-content">
+          <span class="faq-num">13</span>
+          <span class="faq-q-text">S.I.R ki sahi maloomat kahan milegi?</span>
+        </div>
+        <span class="faq-chevron"></span>
+      </summary>
+      <div class="faq-answer">BLO, Election Office ya Voter Helpline App se.</div>
+    </details>
+
+  </div><!-- /faq-grid -->
+
+  <!-- IMPORTANT BOX -->
+  <div class="important-box" style="margin-top:56px;">
+    <h3>📢 Aham Paigham</h3>
+    <p>
+      Agar aap ne abhi tak mapping nahi karwai to jaldi karein —
+      apne BLO se rabta karein aur verification mukammal karein
+      taake future mein vote dene mein koi mushkil na ho.
+    </p>
+    <a href="https://ceoelection.maharashtra.gov.in/2002/2002rolldata.aspx"
+       class="important-btn" target="_blank" rel="noopener">
+      2002 Voter List Check Karein →
+    </a>
+  </div>
+
+</section>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer>
+  Election Commission of India &nbsp;·&nbsp; Maharashtra &nbsp;·&nbsp; S.I.R – Special Intensive Revision
+</footer>
+
+</body>
+</html>
