@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voter Mapping Request</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --saffron: #FF6B1A;
+    --green: #138808;
+    --blue: #0A1F5C;
+    --navy: #0D2137;
+    --gold: #E8A020;
+    --light: #FFF8F0;
+    --white: #FFFFFF;
+    --border: #D4A855;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Rajdhani', 'Noto Sans Devanagari', sans-serif;
+    background: var(--navy);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse at 20% 20%, rgba(255,107,26,0.15) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(19,136,8,0.12) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 50%, rgba(10,31,92,0.8) 0%, transparent 100%);
+    pointer-events: none;
+  }
+
+  .ashok-wheel {
+    position: fixed;
+    top: -80px; right: -80px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    border: 3px solid rgba(232,160,32,0.08);
+    opacity: 0.3;
+    animation: rotate 60s linear infinite;
+  }
+  .ashok-wheel::before {
+    content: '';
+    position: absolute;
+    inset: 15px;
+    border-radius: 50%;
+    border: 2px solid rgba(232,160,32,0.15);
+  }
+
+  @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+  .card {
+    background: var(--white);
+    border-radius: 20px;
+    max-width: 480px;
+    width: 100%;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(232,160,32,0.3);
+    position: relative;
+    animation: slideUp 0.6s cubic-bezier(0.16,1,0.3,1) both;
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Tricolor top bar */
+  .tricolor-bar {
+    height: 10px;
+    background: linear-gradient(to right, var(--saffron) 33.3%, var(--white) 33.3% 66.6%, var(--green) 66.6%);
+    border-bottom: 2px solid var(--gold);
+  }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, var(--blue) 0%, var(--navy) 100%);
+    padding: 24px 24px 20px;
+    text-align: center;
+    position: relative;
+  }
+
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(to right, var(--saffron), var(--gold), var(--green));
+  }
+
+  .header-icon {
+    font-size: 36px;
+    margin-bottom: 8px;
+    display: block;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.08)} }
+
+  .header h1 {
+    color: var(--white);
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    line-height: 1.3;
+  }
+
+  .header p {
+    color: var(--gold);
+    font-size: 13px;
+    margin-top: 6px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+
+  /* Content */
+  .content { padding: 22px; }
+
+  .request-label {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--saffron), #ff8c42);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+
+  /* Section */
+  .section {
+    background: var(--light);
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 14px;
+    border: 1.5px solid #F0E0C8;
+    position: relative;
+    animation: fadeIn 0.5s ease both;
+  }
+  .section:nth-child(2) { animation-delay: 0.1s; }
+  .section:nth-child(3) { animation-delay: 0.2s; }
+
+  @keyframes fadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+
+  .section-title {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .section-title.current { color: var(--blue); border-color: var(--saffron); }
+  .section-title.history { color: var(--green); border-color: var(--green); }
+
+  .row {
+    display: grid;
+    grid-template-columns: 42% 58%;
+    gap: 4px 8px;
+    align-items: baseline;
+    padding: 5px 0;
+    border-bottom: 1px dashed #E8D5BE;
+  }
+  .row:last-child { border-bottom: none; }
+
+  .label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .value {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  .value.highlight {
+    color: var(--saffron);
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  .value.voter-id {
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: var(--blue);
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+
+  /* Divider */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 6px 0;
+    color: #bbb;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #ddd, transparent);
+  }
+
+  /* CTA */
+  .cta {
+    margin-top: 18px;
+    padding: 16px;
+    background: linear-gradient(135deg, #25D366, #128C7E);
+    border-radius: 14px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 6px 20px rgba(37,211,102,0.3);
+    text-decoration: none;
+    display: block;
+  }
+  .cta:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(37,211,102,0.4); }
+  .cta:active { transform: translateY(0); }
+
+  .cta-text {
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .cta-sub {
+    color: rgba(255,255,255,0.8);
+    font-size: 11px;
+    margin-top: 4px;
+  }
+
+  /* Footer */
+  .footer {
+    padding: 14px 22px 18px;
+    text-align: center;
+    border-top: 1px solid #F0E8DC;
+    background: #FDFAF6;
+  }
+  .footer p {
+    font-size: 11px;
+    color: #AAA;
+    letter-spacing: 0.3px;
+    line-height: 1.6;
+  }
+  .footer strong { color: var(--blue); }
+
+  /* Badge */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #EBF5EB;
+    color: var(--green);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 10px;
+    border: 1px solid #C8E6C9;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="ashok-wheel"></div>
+
+<div class="card">
+  <div class="tricolor-bar"></div>
+
+  <div class="header">
+    <span class="header-icon">🗳️</span>
+    <h1>Voter Mapping Request</h1>
+    <p>मतदाता मैपिंग अनुरोध • Electoral Roll Verification</p>
+  </div>
+
+  <div class="content">
+    <span class="request-label">📋 Meri Mapping Kariye</span>
+
+    <!-- Current Voter Details -->
+    <div class="section">
+      <div class="section-title current">
+        <span>📌</span> Current Voter Details — 2024
+      </div>
+
+      <div class="row">
+        <span class="label">Name</span>
+        <span class="value highlight">Name</span>
+      </div>
+      <div class="row">
+        <span class="label">Assembly No.</span>
+        <span class="value">138 — <strong>Kalyan</strong></span>
+      </div>
+      <div class="row">
+        <span class="label">Yadi No.</span>
+        <span class="value">160</span>
+      </div>
+      <div class="row">
+        <span class="label">Sr. No.</span>
+        <span class="value">93</span>
+      </div>
+      <div class="row">
+        <span class="label">Voter Card No.</span>
+        <span class="value voter-id">YFA9423120</span>
+      </div>
+      <div class="row">
+        <span class="label">Mobile</span>
+        <span class="value" style="color:#bbb;">— (Not Provided)</span>
+      </div>
+    </div>
+
+    <div class="divider">⭐ Family / Parivar Details ⭐</div>
+
+    <!-- 2002 Voter Details -->
+    <div class="section">
+      <div class="section-title history">
+        <span>📜</span> 2002 Voter Details
+        <span class="badge">✓ Self / Father / Mother / Grandparent</span>
+      </div>
+
+      <div class="row">
+        <span class="label">Name</span>
+        <span class="value highlight">Ismail Abdul Maniyar</span>
+      </div>
+      <div class="row">
+        <span class="label">Relation</span>
+        <span class="value">Father</span>
+      </div>
+      <div class="row">
+        <span class="label">State</span>
+        <span class="value">Maharashtra</span>
+      </div>
+      <div class="row">
+        <span class="label">District</span>
+        <span class="value">Thane</span>
+      </div>
+      <div class="row">
+        <span class="label">Assembly</span>
+        <span class="value">Kalyan</span>
+      </div>
+      <div class="row">
+        <span class="label">Yadi No.</span>
+        <span class="value">121</span>
+      </div>
+      <div class="row">
+        <span class="label">Sr. No.</span>
+        <span class="value">80</span>
+      </div>
+    </div>
+
+    <!-- WhatsApp CTA -->
+    <a class="cta" href="https://wa.me/?text=Maam%20meri%20mapping%20kariye%0A%0ACurrent%20Voter%20Details%202024%3A%0AAssembly%20No%3A%20138%20Kalyan%0AYadi%20No%3A%20160%0ASr%20No%3A%2093%0AVoter%20Card%20No%3A%20YFA9423120%0A%0A2002%20Voter%20Details%3A%0AName%3A%20Ismail%20Abdul%20Maniyar%0ARelation%3A%20Father%0AState%3A%20Maharashtra%0ADist%3A%20Thane%0AAssembly%3A%20Kalyan%0AYadi%20No%3A%20121%0ASr%20No%3A%2080" target="_blank">
+      <div class="cta-text">
+        <span>💬</span> WhatsApp Par Bhejein
+      </div>
+      <div class="cta-sub">Tap karein aur message share karein</div>
+    </a>
+  </div>
+
+  <div class="footer">
+    <p>🇮🇳 <strong>Kalyan Assembly — 138</strong><br>
+    Voter Mapping Request • Maharashtra Electoral Roll</p>
+  </div>
+</div>
+
+</body>
+</html>
